@@ -1,5 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { createStore } from "redux";
+
+const reducer = (state = 0, action) => {
+  switch (action.type) {
+    case "INCREMENT":
+      return state + 1;
+    case "DECREMENT":
+      return state - 1;
+    default:
+      return state;
+  }
+};
+
+const store = createStore(reducer);
+
+const unsubscribe = store.subscribe(() => {
+  console.log("Counter:", store.getState());
+});
+
+store.dispatch({ type: "INCREMENT" });
+// Counter: 1
+store.dispatch({ type: "INCREMENT" });
+// Counter: 2
+store.dispatch({ type: "INCREMENT" });
+// Counter: 3
+store.dispatch({ type: "DECREMENT" });
+// Counter: 2
+unsubscribe();
+store.dispatch({ type: "DECREMENT" });
+store.dispatch({ type: "DECREMENT" });
+
+console.log("Counter:", store.getState());
+// Counter: 0
 
 function App() {
   return (

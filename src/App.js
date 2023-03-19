@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { createStore } from "redux";
+import { createStore } from "./masterschool-mini-redux";
 
 const reducer = (state = 0, action) => {
   switch (action.type) {
@@ -24,6 +24,9 @@ store.dispatch({ type: "INCREMENT" });
 store.dispatch({ type: "INCREMENT" });
 // Counter: 2
 store.dispatch({ type: "INCREMENT" });
+const rade = store.subscribe(() => {
+  console.log("Rade:", store.getState());
+});
 // Counter: 3
 store.dispatch({ type: "DECREMENT" });
 // Counter: 2
